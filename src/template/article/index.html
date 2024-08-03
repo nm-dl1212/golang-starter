@@ -13,6 +13,11 @@
     <h1>MyTechBlog</h1>
     <p>{{ Message }}</p>
     <p>{{ Now }}</p>
+    <ul>
+        {% for user in Users %}
+        <li>{{ user }}</li>
+        {% endfor %}
+    </ul>
 </body>
 
 </html>
