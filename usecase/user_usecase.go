@@ -63,7 +63,7 @@ func (uu *userUsecase) Login(user model.User) (string, error) {
 	// jwtトークン(json web token)の生成
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"user_id": storedUser.ID,
-		"exp":     time.Now().Add(time.Hour * 12).Unix(),
+		"exp":     time.Now().Add(time.Hour * 2).Unix(),
 	})
 	tokenString, err := token.SignedString([]byte(os.Getenv("SECRET")))
 	if err != nil {
