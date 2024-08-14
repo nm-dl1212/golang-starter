@@ -6,17 +6,20 @@ import (
 	"rest-api/repository"
 	"rest-api/router"
 	"rest-api/usecase"
+	"rest-api/validator"
 )
 
 func main() {
 	db := db.NewDB()
 
 	userRepository := repository.NewUserRepository(db)
-	userUsecase := usecase.NewUserUsecase(userRepository)
+	userValidator := validator.NewUserValidator()
+	userUsecase := usecase.NewUserUsecase(userRepository, userValidator)
 	userController := controller.NewUserController(userUsecase)
 
 	taskRepository := repository.NewTaskRepository(db)
-	taskUsecase := usecase.NewTaskUsecase(taskRepository)
+	taskValidator := validator.NewTaskValidator()
+	taskUsecase := usecase.NewTaskUsecase(taskRepository, taskValidator)
 	taskController := controller.NewTaskController(taskUsecase)
 
 	e := router.NewRouter(userController, taskController)
